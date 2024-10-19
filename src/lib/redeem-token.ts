@@ -1,5 +1,5 @@
-type CashuToken = string;
+import type { CashuToken } from "./interfaces";
+
 
 export default ( token: CashuToken ) => {
-    
 }

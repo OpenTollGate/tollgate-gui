@@ -1,3 +1,5 @@
+export type CashuToken = string;
+
 export interface MeltSuccess {
     paid: boolean;
     preimage: string;
