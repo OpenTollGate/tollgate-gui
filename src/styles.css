@@ -1,0 +1,4 @@
+@import "material-tailwind/css/material-tailwind.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
