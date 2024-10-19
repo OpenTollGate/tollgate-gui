@@ -13,6 +13,9 @@
 		"baseUrl": ".",
 		"paths": {
 		  "@/*": ["./*"]
+		},
+		"aliases": {
+			"$lib": "src/lib"
 		}
 	}
 }

@@ -1,14 +1,13 @@
-// Check if localStorage and sessionStorage are available
-const localStorageAvailable = supportsHtml5Storage(window.localStorage);
-const sessionStorageAvailable = supportsHtml5Storage(window.sessionStorage);
+const localStorageAvailable = hasStorageCapability(window.localStorage);
+const sessionStorageAvailable = hasStorageCapability(window.sessionStorage);
+
 let storage: "session" | "local" | "cookie" = sessionStorageAvailable
     ? "session"
     : localStorageAvailable
     ? "local"
     : "cookie";
 
-// Function to check if storage (localStorage or sessionStorage) is supported
-function supportsHtml5Storage(storage: Storage): boolean {
+function hasStorageCapability(storage: Storage): boolean {
     try {
         const testKey = 'test';
         storage.setItem(testKey, '1');
@@ -19,8 +18,7 @@ function supportsHtml5Storage(storage: Storage): boolean {
     }
 }
 
-// Function to get a value from the appropriate storage (sessionStorage, localStorage, or cookie)
-export function getValue(key: string): string | null {
+export function getSessionValue(key: string): string | null {
     if (storage === "cookie") {
         return readCookie(key);
     } else if (storage === "session") {
@@ -30,8 +28,7 @@ export function getValue(key: string): string | null {
     }
 }
 
-// Function to set a value in the appropriate storage (sessionStorage, localStorage, or cookie)
-export function setValue(key: string, value: string): void {
+export function setSessionValue(key: string, value: string): void {
     if (storage === "cookie") {
         writeCookie(key, value, 365);
     } else if (storage === "session") {
@@ -41,7 +38,6 @@ export function setValue(key: string, value: string): void {
     }
 }
 
-// Helper function to read a cookie by name
 function readCookie(name: string): string | null {
     const nameEQ = name + "=";
     const cookies = document.cookie.split(';');
@@ -54,7 +50,6 @@ function readCookie(name: string): string | null {
     return null;
 }
 
-// Helper function to write a cookie
 function writeCookie(name: string, value: string, days: number): void {
     let expires = "";
     if (days) {
